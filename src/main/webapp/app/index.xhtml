@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="content">
+			<p:panel>
+				<p:accordionPanel value="#{blogView.posts}" var="post">
+					<p:tab title="#{post.subject}">
+						<h:panelGrid>
+							<h:outputText value="#{post.body}" />
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</p:panel>
+			<p:panel>
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Betreff" />
+						<p:inputText value="#{blogView.subject}"></p:inputText>
+					</h:panelGrid>
+					<h:panelGrid>
+						<h:outputLabel value="Inhalt" />
+						<p:editor id="editor" widgetVar="editorWidget"
+							value="#{blogView.body}" width="600" />
+					</h:panelGrid>
+					<h:commandButton action="#{blogView.doInsertPost()}"
+						value="Post eintragen" />
+				</h:form>
+		</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
